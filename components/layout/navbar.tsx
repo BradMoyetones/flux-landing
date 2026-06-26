@@ -13,6 +13,7 @@ import LogoSvg from '../logo-svg';
 import { GitHub } from '../icons';
 import { Button } from '../ui/button';
 import LogoComponent from '../logo-component';
+import { ArrowUpRightIcon } from 'lucide-react';
 
 const NAV_LINKS = [
     { href: '/', label: 'Home' },
@@ -21,7 +22,7 @@ const NAV_LINKS = [
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-export function Navbar() {
+export function Navbar({ stars }: { stars: number }) {
     const pathname = usePathname();
     const navRef = useRef<HTMLElement>(null);
     const [variant, setVariant] = useState<"top" | "scrolled">("top");
@@ -115,16 +116,21 @@ export function Navbar() {
                         <Link
                             key={link.href}
                             href={link.href}
-                            className={`relative rounded-lg px-4 py-2 text-sm font-medium transition-colors ${pathname === link.href
-                                ? 'text-foreground'
-                                : 'text-foreground-muted hover:text-foreground'
-                                }`}
+                            className={cn(
+                                "relative rounded-lg px-4 py-2 text-sm font-medium transition-colors",
+                                {
+                                    "text-foreground": pathname === link.href,
+                                    "text-muted-foreground hover:text-foreground": pathname !== link.href,
+                                }
+                            )}
                         >
-                            {link.label}
+                            <div className='relative z-1'>
+                                {link.label}
+                            </div>
                             {pathname === link.href && (
                                 <motion.div
                                     layoutId="nav-active"
-                                    className="absolute inset-0 rounded-lg bg-white/6"
+                                    className="absolute inset-0 rounded-lg bg-secondary/50"
                                     transition={{
                                         type: 'spring',
                                         stiffness: 380,
@@ -141,21 +147,11 @@ export function Navbar() {
                         href={GITHUB_CONFIG.repoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-foreground-muted transition-colors hover:text-foreground"
+                        className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
                     >
                         <GitHub />
-                        GitHub
-                        <svg
-                            width="12"
-                            height="12"
-                            viewBox="0 0 12 12"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            className="opacity-50"
-                        >
-                            <path d="M3.5 1.5h7v7M10 2L2 10" />
-                        </svg>
+                        {Intl.NumberFormat('en-US').format(stars)}
+                        <ArrowUpRightIcon className='w-4 h-4' />
                     </a>
                 </div>
 
@@ -221,7 +217,7 @@ export function Navbar() {
                                         "rounded-lg px-4 py-3 text-sm font-medium transition-colors",
                                         {
                                             'bg-accent text-accent-foreground': pathname === link.href,
-                                            'text-foreground-muted hover:text-foreground': pathname !== link.href
+                                            'text-muted-foreground hover:text-foreground': pathname !== link.href
                                         }
                                     )}
                                 >
@@ -232,7 +228,7 @@ export function Navbar() {
                                 href={GITHUB_CONFIG.repoUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm text-foreground-muted transition-colors hover:text-foreground"
+                                className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
                             >
                                 <GitHub />
                                 GitHub

@@ -31,7 +31,7 @@ export default async function DownloadPage() {
         <h1 className="gradient-text text-4xl sm:text-5xl font-bold tracking-tight mb-4">
           Descargas
         </h1>
-        <p className="text-base sm:text-lg text-foreground-muted max-w-2xl mx-auto">
+        <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
           Descarga Flux para tu plataforma. Disponible para macOS, Windows y
           Linux.
         </p>

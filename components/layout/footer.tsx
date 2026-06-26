@@ -6,8 +6,10 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { GITHUB_CONFIG, SITE_CONFIG } from "@/lib/config";
 import LogoComponent from "../logo-component";
+import { GitHub } from "../icons";
+import { ArrowUpRightIcon } from "lucide-react";
 
-export function Footer() {
+export function Footer({ stars }: { stars: number }) {
   const footerRef = useRef<HTMLElement>(null);
   const bigTextRef = useRef<HTMLSpanElement>(null);
 
@@ -39,7 +41,7 @@ export function Footer() {
   return (
     <footer ref={footerRef} className="relative overflow-hidden border-t border-border">
       {/* Top gradient accent line */}
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-primary/30 to-transparent" />
 
       {/* Main footer content */}
       <div className="mx-auto max-w-6xl px-6 pt-20 pb-12">
@@ -80,18 +82,9 @@ export function Footer() {
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
-              GitHub
-              <svg
-                width="10"
-                height="10"
-                viewBox="0 0 12 12"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                className="opacity-50"
-              >
-                <path d="M3.5 1.5h7v7M10 2L2 10" />
-              </svg>
+              <GitHub />
+              {Intl.NumberFormat('en-US').format(stars)}
+              <ArrowUpRightIcon className='w-4 h-4' />
             </a>
           </div>
 
@@ -101,7 +94,7 @@ export function Footer() {
               Proyecto
             </h3>
             <p className="text-sm text-muted-foreground">
-              Hecho con ❤️ por Brad
+              Hecho con ❤️ por <a href={`https://github.com/${GITHUB_CONFIG.owner}`} className="text-primary underline">Brad</a>
             </p>
             <p className="text-xs text-muted-foreground/60">
               © {new Date().getFullYear()} {SITE_CONFIG.name}. All rights
@@ -117,7 +110,7 @@ export function Footer() {
       <div className="relative mt-4 flex items-end justify-center overflow-hidden pb-0">
         <span
           ref={bigTextRef}
-          className="invisible select-none text-[28vw] font-extrabold leading-[0.8] tracking-tighter text-foreground/[0.06] sm:text-[22vw] md:text-[18vw]"
+          className="select-none text-[28vw] font-extrabold leading-[0.8] tracking-tighter text-foreground/6 sm:text-[22vw] md:text-[18vw]"
         >
           FLUX
         </span>

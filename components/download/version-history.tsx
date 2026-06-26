@@ -145,7 +145,7 @@ export function VersionHistory({ releases }: VersionHistoryProps) {
   if (previousReleases.length === 0) {
     return (
       <section>
-        <h2 className="text-xl font-semibold text-foreground-muted mb-6">
+        <h2 className="text-xl font-semibold text-muted-foreground mb-6">
           Versiones anteriores
         </h2>
         <p className="text-sm text-foreground">
@@ -157,7 +157,7 @@ export function VersionHistory({ releases }: VersionHistoryProps) {
 
   return (
     <section>
-      <h2 className="text-xl font-semibold text-foreground-muted mb-6">
+      <h2 className="text-xl font-semibold text-muted-foreground mb-6">
         Versiones anteriores
       </h2>
       <div className="flex flex-col gap-3">

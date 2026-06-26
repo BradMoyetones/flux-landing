@@ -152,3 +152,18 @@ export async function getReleaseByTag(tag: string): Promise<ParsedRelease | null
     return null;
   }
 }
+
+export async function getRepoStars(): Promise<number> {
+  try {
+    const res = await fetch(GITHUB_CONFIG.apiUrl, FETCH_OPTIONS);
+    if (!res.ok) {
+      console.error(`GitHub API error: ${res.status} ${res.statusText}`);
+      return 0;
+    }
+    const data = await res.json();
+    return data && typeof data.stargazers_count === 'number' ? data.stargazers_count : 0;
+  } catch (error) {
+    console.error("Failed to fetch stars:", error);
+    return 0;
+  }
+}

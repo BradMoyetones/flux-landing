@@ -7,6 +7,7 @@ import { GsapProvider } from "@/components/providers/gsap-provider";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { SITE_CONFIG } from "@/lib/config";
+import { getRepoStars } from "@/lib/github";
 
 const geistSans = Geist({
   variable: "--font-sans",
@@ -47,11 +48,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const stars = await getRepoStars();
   return (
     <html
       lang="en"
@@ -60,9 +62,9 @@ export default function RootLayout({
       <body>
         <GsapProvider>
           <LenisProvider>
-            <Navbar />
+            <Navbar stars={stars} />
             <main className="flex-1 pt-[72px]">{children}</main>
-            <Footer />
+            <Footer stars={stars} />
           </LenisProvider>
         </GsapProvider>
       </body>

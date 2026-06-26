@@ -14,6 +14,9 @@ export const GITHUB_CONFIG = {
   owner: "BradMoyetones",
   repo: "flux",
   apiBase: "https://api.github.com",
+  get apiUrl() {
+    return `${this.apiBase}/repos/${this.owner}/${this.repo}`;
+  },
   get releasesUrl() {
     return `${this.apiBase}/repos/${this.owner}/${this.repo}/releases`;
   },
