@@ -84,7 +84,7 @@ export function FeaturesSection() {
           <h2 className="mb-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
             Construido para desarrolladores
           </h2>
-          <p className="mx-auto max-w-2xl text-lg text-foreground-muted">
+          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
             Potencia, privacidad y extensibilidad sin compromisos.
           </p>
         </div>
@@ -93,15 +93,14 @@ export function FeaturesSection() {
           {FEATURES.map((feature, i) => (
             <motion.div
               key={i}
-              className="glass-card flex flex-col gap-6 p-6 md:p-8 border-2 border-transparent invisible"
+              className="bg-card flex flex-col gap-6 p-6 md:p-8 border-2 rounded-xl hover:border-accent-foreground transition-colors"
               style={{ visibility: "hidden" }}
               whileHover={{
                 scale: 1.02,
-                borderColor: "rgba(139, 92, 246, 0.4)",
               }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
-              <div className="flex size-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
+              <div className="flex size-12 items-center justify-center rounded-xl bg-accent text-accent-foreground border border-accent-foreground/20">
                 <div className="size-6">{feature.icon}</div>
               </div>
               <div>

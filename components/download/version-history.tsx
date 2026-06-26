@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import ReactMarkdown from "react-markdown";
+import { Streamdown } from 'streamdown';
 import type { ParsedRelease } from "@/lib/types";
 
 // =============================================================================
@@ -46,17 +46,17 @@ function VersionItem({ release }: { release: ParsedRelease }) {
   return (
     <motion.div
       layout
-      className="glass-card rounded-2xl overflow-hidden"
+      className="bg-card border rounded-2xl overflow-hidden"
       transition={{ layout: { duration: 0.25, ease: "easeInOut" } }}
     >
       {/* Header / Toggle */}
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-card-hover"
+        className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
         aria-expanded={isOpen}
       >
         <div className="flex items-center gap-3">
-          <span className="rounded-full bg-background-tertiary px-3 py-1 text-sm font-mono font-semibold text-foreground">
+          <span className="rounded-full bg-secondary px-3 py-1 text-sm font-mono font-semibold text-foreground">
             v{release.version}
           </span>
           {release.isPrerelease && (
@@ -67,10 +67,10 @@ function VersionItem({ release }: { release: ParsedRelease }) {
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="text-xs text-foreground-subtle hidden sm:inline">
+          <span className="text-xs text-foreground hidden sm:inline">
             {formattedDate}
           </span>
-          <ChevronIcon isOpen={isOpen} className="h-4 w-4 text-foreground-subtle" />
+          <ChevronIcon isOpen={isOpen} className="h-4 w-4 text-foreground" />
         </div>
       </button>
 
@@ -86,18 +86,16 @@ function VersionItem({ release }: { release: ParsedRelease }) {
           >
             <div className="border-t border-border px-5 py-5">
               {/* Date (visible on mobile since it's hidden above) */}
-              <p className="text-xs text-foreground-subtle mb-4 sm:hidden">
+              <p className="text-xs text-foreground mb-4 sm:hidden">
                 {formattedDate}
               </p>
 
               {release.notes ? (
-                <div className="prose-release">
-                  <ReactMarkdown>
-                    {release.notes}
-                  </ReactMarkdown>
+                <div>
+                  <Streamdown>{release.notes}</Streamdown>
                 </div>
               ) : (
-                <p className="text-sm text-foreground-subtle italic">
+                <p className="text-sm text-foreground italic">
                   No hay notas de la versión disponibles.
                 </p>
               )}
@@ -107,7 +105,7 @@ function VersionItem({ release }: { release: ParsedRelease }) {
                 href={release.htmlUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center gap-1.5 text-xs text-accent hover:text-accent-hover transition-colors"
+                className="mt-4 inline-flex items-center gap-1.5 text-xs text-accent-foreground/70 hover:text-accent-foreground transition-colors"
               >
                 Ver en GitHub
                 <svg
@@ -150,7 +148,7 @@ export function VersionHistory({ releases }: VersionHistoryProps) {
         <h2 className="text-xl font-semibold text-foreground-muted mb-6">
           Versiones anteriores
         </h2>
-        <p className="text-sm text-foreground-subtle">
+        <p className="text-sm text-foreground">
           No hay versiones anteriores disponibles.
         </p>
       </section>

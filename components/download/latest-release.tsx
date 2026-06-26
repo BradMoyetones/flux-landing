@@ -7,6 +7,7 @@ import { PlatformCard } from "@/components/download/platform-card";
 import { OS_ORDER, OS_LABELS } from "@/lib/config";
 import { detectPlatform } from "@/lib/detect-os";
 import type { ParsedRelease, DetectedPlatform } from "@/lib/types";
+import { Download } from "lucide-react";
 
 // =============================================================================
 // OS Section Icons (inline SVG — same as platform-card but larger)
@@ -86,24 +87,12 @@ function SmartDownloadButton({
     <motion.a
       href={suggestedAsset.downloadUrl}
       download
-      className="group inline-flex items-center gap-3 rounded-2xl bg-accent px-8 py-4 text-base font-semibold text-white shadow-lg transition-colors hover:bg-accent-hover glow"
+      className="group inline-flex items-center gap-3 rounded-2xl bg-accent text-accent-foreground border border-accent-foreground/20 shadow-lg shadow-accent px-8 py-4 text-base font-semibold transition-colors"
       whileHover={{ scale: 1.03, y: -2 }}
       whileTap={{ scale: 0.98 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
-      <svg
-        className="h-5 w-5"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={2}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-        <polyline points="7 10 12 15 17 10" />
-        <line x1="12" y1="15" x2="12" y2="3" />
-      </svg>
+      <Download size={20}/>
       <span>
         Descargar para {detectedPlatform?.label ?? "tu plataforma"}
       </span>
@@ -144,7 +133,7 @@ export function LatestRelease({ release }: LatestReleaseProps) {
       {/* Version header */}
       <AnimatedSection className="text-center mb-10">
         <div className="inline-flex items-center gap-3 mb-4">
-          <span className="rounded-full bg-accent/15 px-4 py-1.5 text-sm font-semibold text-accent">
+          <span className="rounded-full bg-accent px-4 py-1.5 text-sm font-semibold text-accent-foreground border border-accent-foreground/20">
             v{release.version}
           </span>
           {release.isPrerelease && (
@@ -179,7 +168,7 @@ export function LatestRelease({ release }: LatestReleaseProps) {
             <div className="flex items-center gap-3 mb-6">
               <OSSectionIcon
                 os={os}
-                className="h-5 w-5 text-foreground-muted"
+                className="h-5 w-5 text-muted-foreground"
               />
               <h3 className="text-lg font-semibold text-foreground">
                 {OS_LABELS[os]}

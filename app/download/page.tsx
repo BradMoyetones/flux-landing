@@ -58,7 +58,7 @@ export default async function DownloadPage() {
       ) : (
         /* Empty / error state */
         <section className="py-24 text-center">
-          <div className="glass-card mx-auto max-w-md rounded-2xl p-8">
+          <div className="bg-card border mx-auto max-w-md rounded-2xl p-8">
             <div className="mb-4 flex justify-center">
               <svg
                 className="h-12 w-12 text-foreground-subtle"

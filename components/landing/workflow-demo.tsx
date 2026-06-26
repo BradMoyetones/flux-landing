@@ -79,10 +79,10 @@ export function WorkflowDemo() {
     <section ref={containerRef} className="py-24 overflow-hidden">
       <div className="mx-auto max-w-6xl px-6 text-center">
         <h2 className="mb-16 text-3xl font-bold tracking-tight md:text-4xl">
-          <span className="gradient-text-accent">Cómo funciona</span>
+          <span className="bg-linear-to-r from-primary via-50% via-primary to-foreground bg-clip-text text-transparent">Cómo funciona</span>
         </h2>
 
-        <div className="relative mx-auto max-w-4xl rounded-3xl bg-background-secondary p-8 md:p-16 border border-border">
+        <div className="relative mx-auto max-w-4xl rounded-3xl bg-background p-8 md:p-16 border border-border">
           {/* SVG Connections Container */}
           <div className="absolute inset-0 z-0 hidden md:block">
             <svg className="w-full h-full" viewBox="0 0 800 200" preserveAspectRatio="none">
@@ -90,7 +90,7 @@ export function WorkflowDemo() {
               <motion.path
                 d="M 230 100 C 300 100, 300 100, 380 100"
                 fill="none"
-                stroke="var(--accent)"
+                stroke="var(--accent-foreground)"
                 strokeWidth="3"
                 strokeDasharray="6 6"
                 initial={{ pathLength: 0, opacity: 0 }}
@@ -99,7 +99,7 @@ export function WorkflowDemo() {
               />
               <motion.circle
                 r="4"
-                fill="var(--accent)"
+                fill="var(--accent-foreground)"
                 className="glow"
                 initial={{ offsetDistance: "0%", opacity: 0 }}
                 animate={inView ? { offsetDistance: "100%", opacity: [0, 1, 1, 0] } : {}}
@@ -111,7 +111,7 @@ export function WorkflowDemo() {
               <motion.path
                 d="M 520 100 C 580 100, 580 100, 650 100"
                 fill="none"
-                stroke="var(--accent)"
+                stroke="var(--accent-foreground)"
                 strokeWidth="3"
                 strokeDasharray="6 6"
                 initial={{ pathLength: 0, opacity: 0 }}
@@ -120,7 +120,7 @@ export function WorkflowDemo() {
               />
               <motion.circle
                 r="4"
-                fill="var(--accent)"
+                fill="var(--accent-foreground)"
                 className="glow"
                 initial={{ offsetDistance: "0%", opacity: 0 }}
                 animate={inView ? { offsetDistance: "100%", opacity: [0, 1, 1, 0] } : {}}
@@ -135,7 +135,7 @@ export function WorkflowDemo() {
             {NODES.map((node) => (
               <div
                 key={node.id}
-                className="glass-card flex w-full max-w-[240px] flex-col items-center gap-4 rounded-2xl p-6 text-center invisible"
+                className="bg-card border flex w-full max-w-[240px] flex-col items-center gap-4 rounded-2xl p-6 text-center invisible"
               >
                 <div
                   className="flex size-14 items-center justify-center rounded-2xl glow shadow-lg"

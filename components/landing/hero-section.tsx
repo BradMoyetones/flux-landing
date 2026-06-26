@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
 import { SmartDownloadButton } from "./smart-download-button";
+import { Button } from "../ui/button";
 
 export function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -40,13 +41,13 @@ export function HeroSection() {
       className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden px-6 pt-20 pb-16 text-center"
     >
       {/* Background Radial Gradient Glow */}
-      <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[600px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/20 blur-[120px]" />
+      <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[600px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent blur-[120px]" />
 
       <div className="z-10 flex max-w-4xl flex-col items-center gap-8">
         {/* Version Badge */}
         <div
           ref={badgeRef}
-          className="invisible rounded-full border border-accent/20 bg-accent/10 px-4 py-1.5 text-sm font-semibold text-accent backdrop-blur-md"
+          className="invisible rounded-full border border-accent-foreground/20 bg-accent px-4 py-1.5 text-sm font-semibold text-accent-foreground"
         >
           v1.0.0
         </div>
@@ -55,13 +56,13 @@ export function HeroSection() {
         <h1 className="flex flex-col gap-2 text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
           <span
             ref={headingLine1Ref}
-            className="invisible gradient-text glow-text pb-2"
+            className="invisible pb-2 bg-linear-to-l from-primary via-70% via-foreground to-foreground bg-clip-text text-transparent"
           >
             Automatiza tus flujos de trabajo.
           </span>
           <span
             ref={headingLine2Ref}
-            className="invisible gradient-text-accent glow-text pb-2"
+            className="invisible pb-2 bg-linear-to-r from-primary via-60% via-primary to-foreground bg-clip-text text-transparent"
           >
             Sin la nube.
           </span>
@@ -70,7 +71,7 @@ export function HeroSection() {
         {/* Subtitle */}
         <p
           ref={subtitleRef}
-          className="invisible max-w-2xl text-lg text-foreground-muted sm:text-xl"
+          className="invisible max-w-2xl text-lg text-muted-foreground sm:text-xl"
         >
           El motor de flujos de trabajo de escritorio construido sobre Tauri.
           Encadena peticiones HTTP, transforma datos y orquesta servicios con
@@ -80,14 +81,18 @@ export function HeroSection() {
         {/* CTA Buttons */}
         <div
           ref={buttonsRef}
-          className="invisible mt-4 flex flex-col items-center gap-4 sm:flex-row"
+          className="mt-4 flex flex-col items-center gap-4 sm:flex-row"
         >
           <SmartDownloadButton variant="hero" />
           <Link
             href="/download"
-            className="rounded-xl px-8 py-4 text-base font-medium text-foreground-muted transition-colors hover:bg-white/[0.06] hover:text-foreground"
           >
-            Ver todas las descargas
+            <Button
+              variant={"ghost"}
+              className="px-8! py-7! rounded-xl"
+            >
+              Ver todas las descargas
+            </Button>
           </Link>
         </div>
       </div>

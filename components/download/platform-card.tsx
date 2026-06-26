@@ -2,6 +2,9 @@
 
 import { motion } from "framer-motion";
 import type { ParsedAsset } from "@/lib/types";
+import { cn } from "@/lib/utils";
+import { Button } from "../ui/button";
+import { Download } from "lucide-react";
 
 // =============================================================================
 // OS Icons (inline SVG)
@@ -93,42 +96,42 @@ interface PlatformCardProps {
 export function PlatformCard({ asset, isSuggested }: PlatformCardProps) {
   return (
     <motion.div
-      className={`glass-card relative rounded-2xl p-5 flex flex-col gap-4 ${
-        isSuggested
-          ? "border-accent-glow ring-1 ring-accent/30 glow"
-          : ""
-      }`}
+      className={
+        cn("bg-card relative rounded-2xl p-5 flex flex-col gap-4 border",
+          {
+            "border-accent-foreground/20! shadow-xl shadow-accent": isSuggested,
+          }
+        )}
       whileHover={{
         scale: 1.01,
-        borderColor: "rgba(139, 92, 246, 0.3)",
       }}
       transition={{ duration: 0.2, ease: "easeOut" }}
     >
       {/* Suggested badge */}
       {isSuggested && (
-        <span className="absolute -top-2.5 right-4 rounded-full bg-accent px-3 py-0.5 text-xs font-semibold text-white shadow-md">
+        <span className="absolute -top-2.5 right-4 rounded-full bg-accent px-3 py-0.5 text-xs font-semibold text-accent-foreground border border-accent-foreground/20 shadow-md">
           Recomendado
         </span>
       )}
 
       {/* Header: Icon + Label */}
       <div className="flex items-start gap-3">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-background-tertiary">
-          <OSIcon os={asset.os} className="h-5 w-5 text-foreground-muted" />
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-secondary">
+          <OSIcon os={asset.os} className="h-5 w-5 text-muted-foreground" />
         </div>
         <div className="min-w-0">
           <h3 className="text-sm font-semibold text-foreground leading-snug">
             {asset.label}
           </h3>
-          <p className="text-xs text-foreground-subtle mt-0.5">
+          <p className="text-xs text-muted-foreground mt-0.5">
             {asset.description}
           </p>
         </div>
       </div>
 
       {/* Meta: size + format */}
-      <div className="flex items-center gap-3 text-xs text-foreground-subtle">
-        <span className="rounded-md bg-background-tertiary px-2 py-0.5 font-mono">
+      <div className="flex items-center gap-3 text-xs text-muted-foreground">
+        <span className="rounded-md bg-secondary px-2 py-0.5 font-mono">
           {asset.format}
         </span>
         <span>{asset.sizeFormatted}</span>
@@ -138,16 +141,17 @@ export function PlatformCard({ asset, isSuggested }: PlatformCardProps) {
       <motion.a
         href={asset.downloadUrl}
         download
-        className={`mt-auto flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition-colors ${
-          isSuggested
-            ? "bg-accent text-white hover:bg-accent-hover"
-            : "bg-background-tertiary text-foreground-muted hover:bg-background-secondary hover:text-foreground"
-        }`}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
       >
-        <DownloadIcon className="h-4 w-4" />
-        Descargar
+        <Button
+          variant={isSuggested ? "default" : "secondary"}
+          size={"lg"}
+          className="w-full"
+        >
+          <Download />
+          Descargar
+        </Button>
       </motion.a>
     </motion.div>
   );
