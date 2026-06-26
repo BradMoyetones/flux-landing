@@ -48,7 +48,7 @@ export function SmartDownloadButton({
   }, []);
 
   const sizeClass =
-    variant === "hero" ? "px-8 py-4 text-base" : "px-6 py-3 text-sm";
+    variant === "hero" ? "px-4 py-2 md:px-8 md:py-4 text-base" : "px-6 py-3 text-sm";
   const iconClass = variant === "hero" ? "h-6 w-6" : "h-5 w-5";
 
   if (isLoading) {
