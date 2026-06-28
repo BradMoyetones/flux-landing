@@ -1,12 +1,16 @@
 "use client";
 
-import { ReactLenis } from "lenis/react";
+import { ReactLenis, useLenis } from "lenis/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 interface LenisProviderProps {
   children: React.ReactNode;
 }
 
 export function LenisProvider({ children }: LenisProviderProps) {
+  // Sync Lenis scroll with GSAP ScrollTrigger
+  useLenis(ScrollTrigger.update);
+
   return (
     <ReactLenis
       root
