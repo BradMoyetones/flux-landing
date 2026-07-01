@@ -9,8 +9,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { cn } from '@/lib/utils';
-import LogoSvg from '../logo-svg';
-import { GitHub } from '../icons';
+import { Icons } from '../icons';
 import { Button } from '../ui/button';
 import LogoComponent from '../logo-component';
 import { ArrowUpRightIcon } from 'lucide-react';
@@ -18,6 +17,7 @@ import { ArrowUpRightIcon } from 'lucide-react';
 const NAV_LINKS = [
     { href: '/', label: 'Home' },
     { href: '/download', label: 'Download' },
+    { href: '/docs', label: 'Documentation' },
 ];
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -25,7 +25,7 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 export function Navbar({ stars }: { stars: number }) {
     const pathname = usePathname();
     const navRef = useRef<HTMLElement>(null);
-    const [variant, setVariant] = useState<"top" | "scrolled">("top");
+    const [variant, setVariant] = useState<'top' | 'scrolled'>('top');
 
     const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -36,25 +36,26 @@ export function Navbar({ stars }: { stars: number }) {
 
     useEffect(() => {
         if (mobileOpen) {
-            document.body.classList.add("overflow-hidden")
+            document.body.classList.add('overflow-hidden');
         } else {
-            document.body.classList.remove("overflow-hidden")
+            document.body.classList.remove('overflow-hidden');
         }
-    }, [mobileOpen])
+    }, [mobileOpen]);
 
     const variants = {
-        top: "bg-transparent",
-        scrolled: "bg-background/50 backdrop-blur-xl ring ring-border",
-    }
+        top: 'bg-transparent',
+        scrolled: 'bg-background/50 backdrop-blur-xl ring ring-border',
+    };
 
     useGSAP(
         () => {
             // 1. Estado inicial de React si se refresca a mitad de página
-            setVariant(window.scrollY > 50 ? "scrolled" : "top");
+            setVariant(window.scrollY > 50 ? 'scrolled' : 'top');
 
             // 2. Animación de entrada blindada con fromTo
             // Al decirle explícitamente DE DÓNDE a DÓNDE va, GSAP no adivina.
-            gsap.fromTo('.navbar-inner',
+            gsap.fromTo(
+                '.navbar-inner',
                 { yPercent: -150, opacity: 0 },
                 { yPercent: 0, opacity: 1, duration: 0.8, ease: 'power3.out', delay: 0.6 }
             );
@@ -67,7 +68,7 @@ export function Navbar({ stars }: { stars: number }) {
                     const currentScroll = self.scroll();
 
                     // Actualiza el fondo en tiempo real
-                    setVariant(currentScroll > 50 ? "scrolled" : "top");
+                    setVariant(currentScroll > 50 ? 'scrolled' : 'top');
 
                     // Scrollear hacia abajo -> Oculta
                     if (self.direction === 1 && currentScroll > 100) {
@@ -92,17 +93,12 @@ export function Navbar({ stars }: { stars: number }) {
     );
 
     return (
-        <header
-            ref={navRef}
-            className="fixed top-2 md:top-6 right-2 left-2 z-50"
-        >
+        <header ref={navRef} className="fixed top-2 md:top-6 right-2 left-2 z-50">
             <nav
-                className={
-                    cn(
-                        "navbar-inner mx-auto flex max-w-6xl items-center justify-between px-6 py-2 rounded-full",
-                        variants[variant],
-                    )
-                }
+                className={cn(
+                    'navbar-inner mx-auto flex max-w-6xl items-center justify-between px-6 py-2 rounded-full',
+                    variants[variant]
+                )}
             >
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2.5 group">
@@ -116,17 +112,12 @@ export function Navbar({ stars }: { stars: number }) {
                         <Link
                             key={link.href}
                             href={link.href}
-                            className={cn(
-                                "relative rounded-lg px-4 py-2 text-sm font-medium transition-colors",
-                                {
-                                    "text-foreground": pathname === link.href,
-                                    "text-muted-foreground hover:text-foreground": pathname !== link.href,
-                                }
-                            )}
+                            className={cn('relative rounded-lg px-4 py-2 text-sm font-medium transition-colors', {
+                                'text-foreground': pathname === link.href,
+                                'text-muted-foreground hover:text-foreground': pathname !== link.href,
+                            })}
                         >
-                            <div className='relative z-1'>
-                                {link.label}
-                            </div>
+                            <div className="relative z-1">{link.label}</div>
                             {pathname === link.href && (
                                 <motion.div
                                     layoutId="nav-active"
@@ -149,19 +140,14 @@ export function Navbar({ stars }: { stars: number }) {
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
                     >
-                        <GitHub />
+                        <Icons.GitHub />
                         {Intl.NumberFormat('en-US').format(stars)}
-                        <ArrowUpRightIcon className='w-4 h-4' />
+                        <ArrowUpRightIcon className="w-4 h-4" />
                     </a>
                 </div>
 
                 {/* Mobile Hamburger */}
-                <Button
-                    variant="ghost"
-                    size="icon-lg"
-                    onClick={() => setMobileOpen(!mobileOpen)}
-                    className='md:hidden'
-                >
+                <Button variant="ghost" size="icon-lg" onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden">
                     <svg
                         width="20"
                         height="20"
@@ -213,13 +199,10 @@ export function Navbar({ stars }: { stars: number }) {
                                 <Link
                                     key={link.href}
                                     href={link.href}
-                                    className={cn(
-                                        "rounded-lg px-4 py-3 text-sm font-medium transition-colors",
-                                        {
-                                            'bg-accent text-accent-foreground': pathname === link.href,
-                                            'text-muted-foreground hover:text-foreground': pathname !== link.href
-                                        }
-                                    )}
+                                    className={cn('rounded-lg px-4 py-3 text-sm font-medium transition-colors', {
+                                        'bg-accent text-accent-foreground': pathname === link.href,
+                                        'text-muted-foreground hover:text-foreground': pathname !== link.href,
+                                    })}
                                 >
                                     {link.label}
                                 </Link>
@@ -230,7 +213,7 @@ export function Navbar({ stars }: { stars: number }) {
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
                             >
-                                <GitHub />
+                                <Icons.GitHub />
                                 GitHub
                             </a>
                         </div>

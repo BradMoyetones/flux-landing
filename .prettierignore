@@ -1,0 +1,8 @@
+node_modules
+dist
+dist-ssr
+build
+.next
+pnpm-lock.yaml
+.agents
+public
